@@ -1,0 +1,61 @@
+==============================================================
+========================= How to Use =========================
+Legend:
+DR - Defect report      - Use to submit bugs that you find
+ER - Enhancement report - Use to submit new features to add
+
+Status of ER\DR:
+[<S>ubmitted: user.name]  - user.name submitted this ER\DR
+[<A>ssigned : user.name]  - user.name will work on it
+[<O>pened   : user.name]  - user.name is currently working on it
+[<R>esolved : user.name]  - user.name fixed this ER\DR
+[<D>enied   : user.name]  - user.name denied ER\DR as it can't be done, it was unnecessary or etc.
+
+Format:
+(<status_letter>:<user.name>) [DR|ER]<number>:<title>
+                              /***DESCRIPTION:
+                              <description>
+                              /***RESOLUTION:
+                              <resolved description>
+Example:
+(R: Yuri    ) ER0000: "How to Use" example
+              /***DESCRIPTION:
+              This is example of how to format DR\ER on submit and handle.
+              /***RESOLUTION:
+              Here should be described what else was done while resolving report.
+
+Notes:
+1. Next submitted report either DR or ER should have previous number incremented, no matter what type it had
+2. User.name closing bracket should be under each other
+3. Write DESCRIPTION if there is too much to describe in title (e.g. how to reproduce bug)
+4. Description\Resolution should be alighned under ER\DR number
+5. Resoltion appears when additional changes where done (e.g. name of label which wasn't related to report was changed)
+
+================================================================
+========================= Report Board =========================
+
+(S: Yuri    ) ER0001: Add ability for Options manager to be saved to file 
+(S: Yuri    ) ER0002: Options manager code refactoring
+(S: Yuri    ) ER0003: Add new options
+              /***DESCRIPTION:
+              The following options should be added to settings tab:
+              1. "Video stream" group, "Resolution" combobox that will control
+                 size of frames. This size have influence to vplayer and processing
+              2. "Miscellaneous" group, "Show FPS\PFPS" checkbutton that will
+                 enable Frames per Second and Procecced Frames per Second counter
+              3. "Miscellaneous" group, "Show video stream progress" checkbutton
+(S: Yuri    ) ER0004: Misc things to accomplish settings tab
+              /***DESCRIPTION:
+              1. Change tab namings
+              2. Disable video file path when webcam selected
+              3. Add "Default Theme" to combobox
+              4. Change combobox value when options were loaded
+(S: Yuri    ) ER0005: Video player widget with reading from file ability
+(S: Yuri    ) ER0006: Stop\Resume button functionality
+(S: Yuri    ) ER0007: Focus in\Focus Out button functionality
+(S: Yuri    ) ER0008: Video progress bar functionality
+(S: Yuri    ) ER0009: Add webcam support
+ 
+
+
+
