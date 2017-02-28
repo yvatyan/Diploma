@@ -34,9 +34,9 @@ Notes:
 ================================================================
 ========================= Report Board =========================
 
-(S: Yuri    ) ER0001: Add ability for Options manager to be saved to file 
-(S: Yuri    ) ER0002: Options manager code refactoring
-(S: Yuri    ) ER0003: Add new options
+(A: Yuri    ) ER0001: Add ability for Options manager to be saved to file 
+(A: Yuri    ) ER0002: Options manager code refactoring
+(R: Yuri    ) ER0003: Add new options
               /***DESCRIPTION:
               The following options should be added to settings tab:
               1. "Video stream" group, "Resolution" combobox that will control
@@ -44,17 +44,17 @@ Notes:
               2. "Miscellaneous" group, "Show FPS\PFPS" checkbutton that will
                  enable Frames per Second and Procecced Frames per Second counter
               3. "Miscellaneous" group, "Show video stream progress" checkbutton
-(S: Yuri    ) ER0004: Misc things to accomplish settings tab
+(A: Yuri    ) ER0004: Misc things to accomplish settings tab
               /***DESCRIPTION:
               1. Change tab namings
               2. Disable video file path when webcam selected
               3. Add "Default Theme" to combobox
               4. Change combobox value when options were loaded
-(S: Yuri    ) ER0005: Video player widget with reading from file ability
-(S: Yuri    ) ER0006: Stop\Resume button functionality
-(S: Yuri    ) ER0007: Focus in\Focus Out button functionality
-(S: Yuri    ) ER0008: Video progress bar functionality
-(S: Yuri    ) ER0009: Add webcam support
+(A: Yuri    ) ER0005: Video player widget with reading from file ability
+(A: Yuri    ) ER0006: Stop\Resume button functionality
+(A: Yuri    ) ER0007: Focus in\Focus Out button functionality
+(A: Yuri    ) ER0008: Video progress bar functionality
+(A: Yuri    ) ER0009: Add webcam support
  
 
 

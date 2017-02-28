@@ -32,7 +32,7 @@ QStringList ApplicationStyles::StyleNames() const {
 QStringList ApplicationStyles::ThemeNames() const {
     QStringList themes;
     for(int i = 0; i < supportedStyles.count(); ++i) {
-        themes << supportedStyles[i] + " Theme";
+        themes << supportedStyles[i]/* + " Theme"*/;
     }
     return themes;
 }
