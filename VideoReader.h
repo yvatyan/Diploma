@@ -1,0 +1,4 @@
+#ifndef VIDEOREADER_H
+#define VIDEOREADER_H
+
+#endif // VIDEOREADER_H

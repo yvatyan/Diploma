@@ -1,5 +1,5 @@
 #include "ApplicationStyles.h"
-
+#include <QDebug>
 void ApplicationStyles::init() {
     supportedStyles = QStyleFactory::keys();
     if(supportedStyles.contains("Fusion")) {
@@ -10,21 +10,20 @@ void ApplicationStyles::init() {
 ApplicationStyles::ApplicationStyles() {
     init();
 }
-ApplicationStyles::ApplicationStyles(const QString& styleName) {
-    init();
-    SetStyle(styleName);
-}
-void ApplicationStyles::SetStyle(const QString& styleName) {
+int ApplicationStyles::SetStyle(const QString& styleName) {
     if(styleName == "Dark Fusion") {
         qApp->setStyle(QStyleFactory::create("Fusion"));
         qApp->setPalette(getDarkFusionPallete());
+        return StyleIndex("Dark Fusion");
     } else {
         qApp->setStyle(QStyleFactory::create(styleName));
         qApp->setPalette(qApp->style()->standardPalette());
+        return StyleIndex(qApp->style()->objectName());
     }
 }
-void ApplicationStyles::SetStyle(const int styleIndex) {
+int ApplicationStyles::SetStyle(const int styleIndex) {
     SetStyle(supportedStyles[styleIndex]);
+    return styleIndex;
 }
 QStringList ApplicationStyles::StyleNames() const {
     return supportedStyles;
@@ -35,6 +34,17 @@ QStringList ApplicationStyles::ThemeNames() const {
         themes << supportedStyles[i]/* + " Theme"*/;
     }
     return themes;
+}
+int ApplicationStyles::StyleIndex(QString styleName) const {
+    for(int i = 0; i < supportedStyles.count(); ++i) {
+        if(styleName.toLower() == supportedStyles[i].toLower()) {
+            return i;
+        }
+    }
+    return -1;
+}
+QString ApplicationStyles::StyleName(int styleIndex) const {
+    return supportedStyles[styleIndex];
 }
 QPalette ApplicationStyles::getDarkFusionPallete() const {
     QPalette palette;

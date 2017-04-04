@@ -10,6 +10,5 @@ int main(int argc, char *argv[])
     OptionsManager::Initialize();
     MainWindow w;
     w.show();
-
     return a.exec();
 }

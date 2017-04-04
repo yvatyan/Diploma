@@ -11,13 +11,14 @@ class ApplicationStyles : public QObject {
     Q_OBJECT
     public:
         ApplicationStyles();
-        ApplicationStyles(const QString& styleName);
 
         QStringList StyleNames() const;
         QStringList ThemeNames() const;
+        int StyleIndex(QString styleName) const;
+        QString StyleName(int styleIndex) const;
     public slots:
-        void SetStyle(const QString& styleName);
-        void SetStyle(const int styleIndex);
+        int SetStyle(const QString& styleName);
+        int SetStyle(const int styleIndex);
     private:
         QStringList supportedStyles;
 

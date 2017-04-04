@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT       += multimedia
+QT       += multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,13 +15,23 @@ TEMPLATE = app
 
 
 SOURCES +=\
-        MainWindow.cpp \
+    MainWindow.cpp \
     Main.cpp \
     ApplicationStyles.cpp \
-    OptionsManager.cpp
+    OptionsManager.cpp \
+    VideoPlayer/VideoPlayer.cpp \
+    VideoPlayer/VideoWidget.cpp \
+    VideoPlayer/CoverWidget.cpp \
+    VideoPlayer/Background.cpp \
+    FileLineEdit.cpp
 
 HEADERS  += MainWindow.h \
     ApplicationStyles.h \
-    OptionsManager.h
+    OptionsManager.h \
+    VideoPlayer/VideoPlayer.h \
+    VideoPlayer/VideoWidget.h \
+    VideoPlayer/CoverWidget.h \
+    VideoPlayer/Background.h \
+    FileLineEdit.h
 
 FORMS    += MainWindow.ui

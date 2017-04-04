@@ -22,7 +22,7 @@ void OptionsManager::Initialize(const char* optionFilePath) {
                 key.clear();
                 value.clear();
                 continue;
-            } else if(chr == ':') {
+            } else if(writingKey && chr == ':') {
                 writingKey = false;
                 writingValue = true;
                 while(optionsFile.get(chr)) {
