@@ -1,4 +1,4 @@
-#include "CoverWidget.h"
+#include "GUI/VideoPlayer/CoverWidget.h"
 #include <QPainter>
 #include <QPen>
 

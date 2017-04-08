@@ -1,5 +1,4 @@
-#include "OptionsManager.h"
-#include <QDebug>
+#include "Core/OptionsManager.h"
 
 bool OptionsManager::fileExists(const char* fileName) {
     if (FILE *file = fopen(fileName, "r")) {

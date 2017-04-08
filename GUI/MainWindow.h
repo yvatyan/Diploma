@@ -2,9 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <ApplicationStyles.h>
-#include "FileLineEdit.h"
-#include "VideoPlayer/VideoPlayer.h"
+#include "GUI/ApplicationStyles.h"
+#include "GUI/FileLineEdit.h"
+#include "GUI/VideoPlayer/VideoPlayer.h"
 
 namespace Ui {
 class MainWindow;

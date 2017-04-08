@@ -1,5 +1,5 @@
-#include "ApplicationStyles.h"
-#include <QDebug>
+#include "GUI/ApplicationStyles.h"
+
 void ApplicationStyles::init() {
     supportedStyles = QStyleFactory::keys();
     if(supportedStyles.contains("Fusion")) {

@@ -1,5 +1,5 @@
-#include "MainWindow.h"
-#include "OptionsManager.h"
+#include "GUI/MainWindow.h"
+#include "Core/OptionsManager.h"
 #include "ui_MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent)

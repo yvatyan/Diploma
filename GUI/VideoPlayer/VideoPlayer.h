@@ -5,9 +5,9 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QProgressBar>
-#include "VideoPlayer/VideoWidget.h"
-#include "VideoPlayer/CoverWidget.h"
-#include "VideoPlayer/Background.h"
+#include "GUI/VideoPlayer/VideoWidget.h"
+#include "GUI/VideoPlayer/CoverWidget.h"
+#include "GUI/VideoPlayer/Background.h"
 
 class VideoPlayer : public QObject {
      Q_OBJECT

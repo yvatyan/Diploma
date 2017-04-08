@@ -5,7 +5,6 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QColor>
-#include <QRegularExpression>
 
 class FileLineEdit : public QLineEdit {
     Q_OBJECT

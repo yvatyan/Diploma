@@ -15,23 +15,34 @@ TEMPLATE = app
 
 
 SOURCES +=\
-    MainWindow.cpp \
     Main.cpp \
-    ApplicationStyles.cpp \
-    OptionsManager.cpp \
-    VideoPlayer/VideoPlayer.cpp \
-    VideoPlayer/VideoWidget.cpp \
-    VideoPlayer/CoverWidget.cpp \
-    VideoPlayer/Background.cpp \
-    FileLineEdit.cpp
+    Core/ImageData.cpp \
+    Core/Job.cpp \
+    Core/OptionsManager.cpp \
+    Core/VideoFrameProcessor.cpp \
+    Core/ThreadManager/ThreadRunnableTask.cpp \
+    GUI/ApplicationStyles.cpp \
+    GUI/FileLineEdit.cpp \
+    GUI/MainWindow.cpp \
+    GUI/VideoPlayer/Background.cpp \
+    GUI/VideoPlayer/CoverWidget.cpp \
+    GUI/VideoPlayer/VideoPlayer.cpp \
+    GUI/VideoPlayer/VideoWidget.cpp
 
-HEADERS  += MainWindow.h \
-    ApplicationStyles.h \
-    OptionsManager.h \
-    VideoPlayer/VideoPlayer.h \
-    VideoPlayer/VideoWidget.h \
-    VideoPlayer/CoverWidget.h \
-    VideoPlayer/Background.h \
-    FileLineEdit.h
 
-FORMS    += MainWindow.ui
+HEADERS  +=\
+    Core/ImageData.h \
+    Core/Job.h \
+    Core/OptionsManager.h \
+    Core/VideoFrameProcessor.h \
+    Core/ThreadManager/ThreadRunnableTask.h \
+    GUI/ApplicationStyles.h \
+    GUI/FileLineEdit.h \
+    GUI/MainWindow.h \
+    GUI/VideoPlayer/Background.h \
+    GUI/VideoPlayer/CoverWidget.h \
+    GUI/VideoPlayer/VideoPlayer.h \
+    GUI/VideoPlayer/VideoWidget.h
+
+FORMS    += GUI/MainWindow.ui
+

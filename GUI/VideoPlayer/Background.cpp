@@ -1,5 +1,4 @@
-#include "Background.h"
-
+#include "GUI/VideoPlayer/Background.h"
 #include <QPainter>
 
 Background::Background(QWidget* parent) : QWidget(parent) {

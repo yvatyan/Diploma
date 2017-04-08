@@ -1,7 +1,7 @@
-#include "FileLineEdit.h"
-#include <QDebug>
+#include "GUI/FileLineEdit.h"
 #include <QApplication>
 #include <QPalette>
+#include <QStyleFactory>
 
 const QMap<FileLineEdit::PathStatus, QColor>& FileLineEdit::DefaultStatusColors() {
     static QMap<PathStatus, QColor> defaultStatusColors;
@@ -39,7 +39,8 @@ void FileLineEdit::SetFile(QString path) {
 }
 void FileLineEdit::OpenFileDialog(bool buttonClicked) {
     Q_UNUSED(buttonClicked);
-    QString fileName = QFileDialog::getOpenFileName(
+    QFileDialog fileDialog;
+    QString fileName = fileDialog.getOpenFileName(
                             this,
                             dialogCaption,
                             dialogStartingDir,

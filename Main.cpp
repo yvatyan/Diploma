@@ -1,11 +1,9 @@
-#include "MainWindow.h"
-#include "OptionsManager.h"
+#include "GUI/MainWindow.h"
+#include "Core/OptionsManager.h"
 #include <QApplication>
 #include <QStyleFactory>
-#include <QDebug>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     OptionsManager::Initialize();
     MainWindow w;
