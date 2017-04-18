@@ -30,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent)
     configureOptions();
 }
 MainWindow::~MainWindow() {
+	delete videoFilePathEdit;
+	delete videoPlayer;
     delete ui;
 }
 void MainWindow::configureOptions() {
