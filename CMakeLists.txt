@@ -28,9 +28,11 @@ add_executable(
     Demo 
     Main.cpp
     Core/ImageData.cpp 
-    Core/Job.cpp 
+	Core/Misc.cpp
     Core/OptionsManager.cpp 
+	Core/ProcessingEngine/Demo/MonoChromeProc.cpp
     Core/VideoFrameProcessor.cpp 
+	Core/VideoFrameData.cpp
     Core/ThreadManager/ThreadRunnableTask.cpp 
     GUI/ApplicationStyles.cpp 
     GUI/FileLineEdit.cpp 

@@ -53,6 +53,9 @@ class VideoPlayer : public QObject {
         Background backgroundWidget;
         VideoWidget videoWidget;
         CoverWidget coverWidget;
+
+		VideoFrameProcessor videoProcessor;
+		void registerImageProcessingJobs();
 };
 
 #endif // VideoPlayer_H

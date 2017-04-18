@@ -1,0 +1,6 @@
+@VideoFile: /media/sf_D_DRIVE/Old/BinaryMind/Desktop/test_movia/Static_Camera_sample.mp4
+
+@DemoMode: White
+@DemoThreshold: 30
+@DemoKernelSize: 10
+@DemoMakeTransformation: 0

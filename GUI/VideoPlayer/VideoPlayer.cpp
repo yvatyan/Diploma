@@ -1,4 +1,6 @@
 #include "GUI/VideoPlayer/VideoPlayer.h"
+#include "Core/ProcessingEngine/Demo/MonoChromeProc.h"
+#include "Core/OptionsManager.h"
 
 VideoPlayer::VideoPlayer(QWidget* parent)
     : backgroundWidget(parent)
@@ -11,10 +13,13 @@ VideoPlayer::VideoPlayer(QWidget* parent)
     player.setVideoOutput(videoWidget.videoSurface());
     QObject::connect(&player, SIGNAL(positionChanged(qint64)), this, SLOT(OnPositionChange(qint64)));
     QObject::connect(&player, SIGNAL(durationChanged(qint64)), this, SLOT(OnDurationChange(qint64)));
-    // TODO: Remove this when resize funcionallity will be present
+    // TODO: Remove these when resize funcionallity will be present
     backgroundWidget.resize(QSize(640, 480));
-    coverWidget.resize(QSize(640, 480));
     videoWidget.resize(QSize(640, 480));
+
+	registerImageProcessingJobs();
+	videoWidget.SetVideoFrameProcessor(&videoProcessor);
+	videoWidget.SetCoverWidget(&coverWidget);
 }
 void VideoPlayer::SwitchInput(VideoStreamFrom source) {
     videoSource = source;
@@ -82,4 +87,48 @@ void VideoPlayer::ConnectProgressBar(QProgressBar* pb) {
         QObject::connect(this, SIGNAL(playerPositionChanged(int)), pb, SLOT(setValue(int)));
         QObject::connect(this, SIGNAL(playerDurationChanged(int)), pb, SLOT(setMaximum(int)));
     }
+}
+void VideoPlayer::registerImageProcessingJobs() {
+	ThreadRunnableTask taskDemo;
+	taskDemo.AddJob(new MonoChromeProc());
+	taskDemo.SetTaskName("Demo");
+	videoProcessor.AddRunnableTask(taskDemo);
+
+	ConfigCollection taskDemoConfig;
+	QString optionValue;
+    optionValue = OptionsManager::OptionValue("DemoKernelSize").c_str(); {
+        if(optionValue.isEmpty()) {
+        } else {
+			taskDemoConfig.AddConfig<size_t>("KernelSize", optionValue.toInt());
+        }
+    }
+    optionValue = OptionsManager::OptionValue("DemoThreshold").c_str(); {
+        if(optionValue.isEmpty()) {
+        } else {
+			taskDemoConfig.AddConfig<size_t>("Threshold", optionValue.toInt());
+        }
+    }
+    optionValue = OptionsManager::OptionValue("DemoMode").c_str(); {
+        if(optionValue.isEmpty()) {
+        } else {
+			MonoChromeProc::Mode mode;
+			if(optionValue == "Red") {
+				mode = MonoChromeProc::Red;
+			} else if(optionValue == "Green") {
+				mode = MonoChromeProc::Green;
+			} else if(optionValue == "Blue") {
+				mode = MonoChromeProc::Blue;
+			} else if(optionValue == "White") {
+				mode = MonoChromeProc::White;
+			}
+			taskDemoConfig.AddConfig<MonoChromeProc::Mode>("ChromeMode", mode);
+        }
+    }
+    optionValue = OptionsManager::OptionValue("DemoMakeTransformation").c_str(); {
+        if(optionValue.isEmpty()) {
+        } else {
+			taskDemoConfig.AddConfig<bool>("MakeTransformation", optionValue.toInt());
+        }
+    }
+	videoProcessor.ConfigureJob("Demo", "Monochrome processing", taskDemoConfig);
 }

@@ -5,6 +5,8 @@
 #include <QAbstractVideoSurface>
 #include <QVideoRendererControl>
 
+#include "Core/VideoFrameProcessor.h"
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////// VideoSurface ///////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,32 +25,40 @@ public:
 
     void updateVideoRect();
     void paint(QPainter* painter);
+
+	void SetVideoFrameProcessor(VideoFrameProcessor* vp);
+	void SetCoverWidget(QWidget* widget);
 private:
-    QWidget* widget;
+    QWidget* videoWidget;
     QImage::Format imageFormat;
     QRect displayableRectRegion;
     QRect clippedRectRegion;
     QVideoFrame currentFrame;
+
+	size_t frameNumber;
+	VideoFrameProcessor* videoProcessor;
+
+	QWidget* coverWidget;
 };
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////  VideoWidget ////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class VideoWidget : public QWidget {
-     Q_OBJECT
+    Q_OBJECT
  public:
-     VideoWidget(QWidget *parent = Q_NULLPTR);
-     ~VideoWidget();
+    VideoWidget(QWidget *parent = Q_NULLPTR);
+    ~VideoWidget();
 
-     QAbstractVideoSurface* videoSurface() const { return surface; }
+    QAbstractVideoSurface* videoSurface() const;
+	void SetVideoFrameProcessor(VideoFrameProcessor* vfProcessor);
+	void SetCoverWidget(QWidget* widget);
 
-     QSize sizeHint() const;
-
+    QSize sizeHint() const;
  protected:
-     void paintEvent(QPaintEvent* event);
-     void resizeEvent(QResizeEvent* event);
-
+    void paintEvent(QPaintEvent* event);
+    void resizeEvent(QResizeEvent* event);
  private:
-     VideoSurface* surface;
+    VideoSurface* surface;
 };
 
 #endif // VIDEOWIDGET_H
