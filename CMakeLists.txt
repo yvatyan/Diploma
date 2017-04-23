@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 2.8.11)
 set(QT_MINIMUM_VERSION 5.0.0)
 
 project(Diploma)
+
 # SHOULD BE CONFIGURED!!!
 set(QT_DIR /home/binary_mind/Qt5.8.0/5.8)
+set(OpenCV_DIR /home/binary_mind/OpenCV3.2.0)
 
 # Find includes in corresponding build directories (e.g. find generated ui.h files)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -12,16 +14,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-# Specify cmake scripts of Qt5
-set(CMAKE_PREFIX_PATH ${QT_DIR}/gcc_64/lib/cmake)
-
-# Add include directories 
-include_directories(
-    Core
-    Core/ThreadManager
-    GUI
-    GUI/VideoPlayer
-)
+# Specify cmake scripts
+## OpenCVModules.cmake and OpenCVConfig.cmake files should be copy from build to cmake directory 
+set(CMAKE_PREFIX_PATH ${QT_DIR}/gcc_64/lib/cmake;${OpenCV_DIR}/cmake)
 
 # Tell CMake to create the "Demo" executable
 add_executable(
@@ -43,11 +38,12 @@ add_executable(
     GUI/VideoPlayer/VideoWidget.cpp 
 )
 
-# Find the Qt libraries
+# Find the packages
 find_package(Qt5Widgets)
 find_package(Qt5Multimedia)
 find_package(Qt5MultimediaWidgets)
+find_package(OpenCV)
 
-# Use the modules from Qt 5
-target_link_libraries(Demo Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)
+# Use the modules
+target_link_libraries(Demo Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets ${OpenCV_LIBS})
 
