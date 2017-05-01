@@ -82,5 +82,30 @@ class AnnotatedRectangle {
 		RgbaColor   color;
 		std::string text;
 };
+struct Point {
+	int x;
+	int y;
+	Point(int x_, int y_) {
+		x = x_;
+		y = y_;
+	}
+	bool operator==(const Point& point) const {
+		return x == point.x && y == point.y;
+	}
+};
+class AnnotatedPoint {
+	public:
+		AnnotatedPoint(const Point& p, const RgbaColor pointColor, const std::string& pointCaption);
 
+		Point GetPoint() const; 
+		RgbaColor GetRgbaColor() const;
+		const std::string& GetStdString() const;
+
+		bool operator==(const AnnotatedPoint& rhp) const;
+		bool operator!=(const AnnotatedPoint& rhp) const;
+	private:
+		Point point;
+		RgbaColor   color;
+		std::string text;
+};
 #endif // MISC_H

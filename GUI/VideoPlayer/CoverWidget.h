@@ -14,6 +14,9 @@ class CoverWidget : public QWidget {
 		void SetAnnoRectRegions(const std::vector<AnnotatedRectangle>& rects);
 		const std::vector<AnnotatedRectangle>& GetAnnoRectRegions() const;
 		void ResetRegions();
+		void SetAnnoCrossPoints(const std::vector<AnnotatedPoint>& points);
+		const std::vector<AnnotatedPoint>& GetAnnoCrossPoints() const;
+		void ResetPoints();
     protected:
         void mousePressEvent(QMouseEvent* event);
         void mouseReleaseEvent(QMouseEvent* event);
@@ -22,14 +25,21 @@ class CoverWidget : public QWidget {
     private:
         static quint64 minSelectionArea;
 		static QFont font;
+		static size_t crossPointVerLen;
+		static size_t crossPointHorLen;
         QRect selectedRect;
         QPoint startedPoint;
         bool selectionDisabled;
 		bool textDisabled;
 		bool rectRegionsDisabled;
 		std::vector<AnnotatedRectangle> rectRegions;
+		bool crossPointsDisabled;
+		std::vector<AnnotatedPoint> objPoints;
 	
-		QPoint rectCaptionTextPoint(AnnotatedRectangle annoRect);
+		QPoint rectCaptionTextPoint(const Rectangle& rect, const std::string& text);
+		QLine crossPointVerLine(const Point& point);
+		QLine crossPointHorLine(const Point& point);
+		Rectangle crossPointBoundingRect(const Point& point);
     signals:
         void selectionComplete();
 };

@@ -14,6 +14,7 @@ VideoFrameData MonoChromeProc::Process(const VideoFrameData& dataToProcess) {
 		uchar* imageRes = new uchar[count];
 		uchar red, green, blue;
 		size_t colorShift;
+		std::vector<AnnotatedPoint> avgPoints;
 		switch(ChromeMode) {
 			case Red	: {
 				colorShift = 2;
@@ -54,6 +55,14 @@ VideoFrameData MonoChromeProc::Process(const VideoFrameData& dataToProcess) {
 			imageRes[i+1] = green;
 			imageRes[i+2] = red;
 			imageRes[i+3] = 0xff;
+			if(ChromeMode != White) {
+				if(_INTERVAL <= imageRes[i + colorShift] && imageRes[i + colorShift] <= INTERVAL_) {
+					avgPoints.push_back(AnnotatedPoint(
+							Point((i/4)%imageSize.width, i/(4*imageSize.width)),
+							RgbaColor(255, 0, 0, 255),
+							std::string("Pxl=")+std::to_string(imageRaw[i+colorShift])));
+				}
+			}
 		}
 		std::vector<AnnotatedRectangle> avgWindows;
 		for(size_t i = 0; i < imageSize.height; i += KernelSize) {
@@ -80,14 +89,16 @@ VideoFrameData MonoChromeProc::Process(const VideoFrameData& dataToProcess) {
 				resultImage,
 				Name(),
 				dataToProcess.GetFrameNumber(),
-				avgWindows
+				avgWindows,
+				avgPoints
 			);
 		} else {
 			return VideoFrameData(
 				ImageData(),
 				Name(),
 				dataToProcess.GetFrameNumber(),
-				avgWindows
+				avgWindows,
+				avgPoints
 			);
 		}
 	}
@@ -98,6 +109,8 @@ void MonoChromeProc::Configure(const ConfigCollection& config) {
 	ChromeMode = config.GetConfigValue<Mode>("ChromeMode");
 	Threshold = config.GetConfigValue<size_t>("Threshold");
 	MakeTransformation = config.GetConfigValue<bool>("MakeTransformation");
+	_INTERVAL = config.GetConfigValue<size_t>("PixelIntervalStart");
+	INTERVAL_ = config.GetConfigValue<size_t>("PixelIntervalEnd");
 	configured = true;
 }
 const char* MonoChromeProc::Name() const {

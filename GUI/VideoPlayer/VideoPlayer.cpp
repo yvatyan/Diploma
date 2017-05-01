@@ -130,5 +130,17 @@ void VideoPlayer::registerImageProcessingJobs() {
 			taskDemoConfig.AddConfig<bool>("MakeTransformation", optionValue.toInt());
         }
     }
+    optionValue = OptionsManager::OptionValue("DemoPixelIntervalStart").c_str(); {
+        if(optionValue.isEmpty()) {
+        } else {
+			taskDemoConfig.AddConfig<size_t>("PixelIntervalStart", optionValue.toInt());
+        }
+    }
+    optionValue = OptionsManager::OptionValue("DemoPixelIntervalEnd").c_str(); {
+        if(optionValue.isEmpty()) {
+        } else {
+			taskDemoConfig.AddConfig<size_t>("PixelIntervalEnd", optionValue.toInt());
+        }
+    }
 	videoProcessor.ConfigureJob("Demo", "Monochrome processing", taskDemoConfig);
 }

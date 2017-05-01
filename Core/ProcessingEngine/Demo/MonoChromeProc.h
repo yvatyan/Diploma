@@ -20,6 +20,8 @@ class MonoChromeProc : public Job {
 	Mode ChromeMode;
 	size_t Threshold;
 	bool MakeTransformation;
+	size_t _INTERVAL;
+	size_t INTERVAL_;
 	// end
 	bool configured;
 };

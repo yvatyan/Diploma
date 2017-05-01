@@ -65,6 +65,9 @@ void VideoFrameProcessor::mergeTaskResults() {
 				procResult.SetImageData(result->GetImageData());
 				transformResult = true;
 			}
+			if(result->ContainsPointedResult()) {
+				procResult.AddObjectPoints(runnableTasks[i].GetResult().GetObjectPoints());
+			}
 		}
 	}
 }

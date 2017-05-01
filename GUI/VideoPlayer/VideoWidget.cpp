@@ -70,6 +70,7 @@ void VideoSurface::stop() {
     videoWidget->update();
 	if(coverWidget) {
 		static_cast<CoverWidget*>(coverWidget)->ResetRegions();
+		static_cast<CoverWidget*>(coverWidget)->ResetPoints();
 	}
 }
 bool VideoSurface::present(const QVideoFrame& frame) {
@@ -129,6 +130,11 @@ void VideoSurface::paint(QPainter* painter) {
 		if(data->ContainsRegionResult()) {
 			if(coverWidget) {
 				static_cast<CoverWidget*>(coverWidget)->SetAnnoRectRegions(data->GetObjectRegions());
+			}
+		}
+		if(data->ContainsPointedResult()) {
+			if(coverWidget) {
+				static_cast<CoverWidget*>(coverWidget)->SetAnnoCrossPoints(data->GetObjectPoints());
 			}
 		}
 	} 
