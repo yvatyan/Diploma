@@ -6,3 +6,12 @@
 @DemoMakeTransformation: 0
 @DemoPixelIntervalStart: 50
 @DemoPixelIntervalEnd: 50
+
+@__SiftIntvls: -1
+@SiftSigma: 1.0
+@__SiftContrThr: 1.0
+@__SiftCurvThr: -1
+@__SiftImgDbl: -1
+@SiftDescriptorWidth: -1
+@SiftHistogramBins: -1
+

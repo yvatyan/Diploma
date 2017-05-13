@@ -56,6 +56,8 @@ class VideoPlayer : public QObject {
 
 		VideoFrameProcessor videoProcessor;
 		void registerImageProcessingJobs();
+		void registerJobDemo();
+		void registerJobSiftFeatures();
 };
 
 #endif // VideoPlayer_H

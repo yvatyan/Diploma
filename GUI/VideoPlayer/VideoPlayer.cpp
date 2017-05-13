@@ -1,5 +1,6 @@
 #include "GUI/VideoPlayer/VideoPlayer.h"
 #include "Core/ProcessingEngine/Demo/MonoChromeProc.h"
+#include "Core/ProcessingEngine/SiftFeatures.h"
 #include "Core/OptionsManager.h"
 
 VideoPlayer::VideoPlayer(QWidget* parent)
@@ -89,6 +90,14 @@ void VideoPlayer::ConnectProgressBar(QProgressBar* pb) {
     }
 }
 void VideoPlayer::registerImageProcessingJobs() {
+	if(0) {	// TODO: Here will be control checkbox
+		registerJobDemo();
+	}
+	if(1) {
+		registerJobSiftFeatures();
+	}
+}
+void VideoPlayer::registerJobDemo() {
 	ThreadRunnableTask taskDemo;
 	taskDemo.AddJob(new MonoChromeProc());
 	taskDemo.SetTaskName("Demo");
@@ -143,4 +152,60 @@ void VideoPlayer::registerImageProcessingJobs() {
         }
     }
 	videoProcessor.ConfigureJob("Demo", "Monochrome processing", taskDemoConfig);
+}
+void VideoPlayer::registerJobSiftFeatures() {
+	bool configNeeded = false;	// TODO: HARDCODED
+	ThreadRunnableTask task;
+	task.AddJob(new SiftFeatures(configNeeded));
+	task.SetTaskName("Sift");
+	videoProcessor.AddRunnableTask(task);
+
+	if(configNeeded) {
+		ConfigCollection taskConfig;
+		QString optionValue;
+		// TODO: Replace options names startin with __ later for more understandable names
+		optionValue = OptionsManager::OptionValue("__SiftIntvls").c_str(); {
+			if(optionValue.isEmpty()) {
+			} else {
+				taskConfig.AddConfig<int>("Intvls", optionValue.toInt());
+			}
+		}
+		optionValue = OptionsManager::OptionValue("SiftSigma").c_str(); {
+			if(optionValue.isEmpty()) {
+			} else {
+				taskConfig.AddConfig<double>("Sigma", optionValue.toDouble());
+			}
+		}
+		optionValue = OptionsManager::OptionValue("__SiftContrThr").c_str(); {
+			if(optionValue.isEmpty()) {
+			} else {
+				taskConfig.AddConfig<double>("ContrThr", optionValue.toDouble());
+			}
+		}
+		optionValue = OptionsManager::OptionValue("__SiftCurvThr").c_str(); {
+			if(optionValue.isEmpty()) {
+			} else {
+				taskConfig.AddConfig<int>("CurvThr", optionValue.toInt());
+			}
+		}
+		optionValue = OptionsManager::OptionValue("__SiftImgDbl").c_str(); {
+			if(optionValue.isEmpty()) {
+			} else {
+				taskConfig.AddConfig<int>("ImgDbl", optionValue.toInt());
+			}
+		}
+		optionValue = OptionsManager::OptionValue("SiftDescriptorWidth").c_str(); {
+			if(optionValue.isEmpty()) {
+			} else {
+				taskConfig.AddConfig<int>("DescriptorWidth", optionValue.toInt());
+			}
+		}
+		optionValue = OptionsManager::OptionValue("SiftHistogramBins").c_str(); {
+			if(optionValue.isEmpty()) {
+			} else {
+				taskConfig.AddConfig<int>("HistogramBins", optionValue.toInt());
+			}
+		}
+		videoProcessor.ConfigureJob("Sift", "Sift Features", taskConfig);
+	}
 }

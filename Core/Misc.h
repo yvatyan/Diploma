@@ -54,7 +54,7 @@ struct RgbaColor {
 	uchar G;
 	uchar B;
 	uchar A;
-	RgbaColor(uchar r, uchar g, uchar b, uchar a = 255) {
+	RgbaColor(uchar r = 0, uchar g = 0, uchar b = 0, uchar a = 255) {
 		R = r; G = g; B = b; A = a;
 	}
 	QColor QtColor() {
@@ -85,7 +85,7 @@ class AnnotatedRectangle {
 struct Point {
 	int x;
 	int y;
-	Point(int x_, int y_) {
+	Point(int x_ = -1, int y_ = -1) {
 		x = x_;
 		y = y_;
 	}
@@ -95,6 +95,7 @@ struct Point {
 };
 class AnnotatedPoint {
 	public:
+		AnnotatedPoint();
 		AnnotatedPoint(const Point& p, const RgbaColor pointColor, const std::string& pointCaption);
 
 		Point GetPoint() const; 

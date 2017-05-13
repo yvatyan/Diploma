@@ -18,6 +18,21 @@ set(CMAKE_AUTOUIC ON)
 ## OpenCVModules.cmake and OpenCVConfig.cmake files should be copy from build to cmake directory 
 set(CMAKE_PREFIX_PATH ${QT_DIR}/gcc_64/lib/cmake;${OpenCV_DIR}/cmake)
 
+# Find the packages
+find_package(Qt5Widgets)
+find_package(Qt5Multimedia)
+find_package(Qt5MultimediaWidgets)
+find_package(OpenCV)
+find_package(PkgConfig)
+pkg_check_modules(GTK2 gtk+-2.0)
+find_package(Threads)
+
+# Specify include directories
+include_directories(
+    Core/ProcessingEngine/OpenSift/include
+	${GTK2_INCLUDE_DIRS}
+)
+
 # Tell CMake to create the "Demo" executable
 add_executable(
     Demo 
@@ -26,6 +41,10 @@ add_executable(
 	Core/Misc.cpp
     Core/OptionsManager.cpp 
 	Core/ProcessingEngine/Demo/MonoChromeProc.cpp
+	Core/ProcessingEngine/OpenSift/src/imgfeatures.cpp
+	Core/ProcessingEngine/OpenSift/src/sift.cpp
+	Core/ProcessingEngine/OpenSift/src/utils.cpp
+	Core/ProcessingEngine/SiftFeatures.cpp
     Core/VideoFrameProcessor.cpp 
 	Core/VideoFrameData.cpp
     Core/ThreadManager/ThreadRunnableTask.cpp 
@@ -38,12 +57,13 @@ add_executable(
     GUI/VideoPlayer/VideoWidget.cpp 
 )
 
-# Find the packages
-find_package(Qt5Widgets)
-find_package(Qt5Multimedia)
-find_package(Qt5MultimediaWidgets)
-find_package(OpenCV)
-
 # Use the modules
-target_link_libraries(Demo Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets ${OpenCV_LIBS})
+target_link_libraries(
+	Demo
+	Qt5::Widgets
+	Qt5::Multimedia
+	Qt5::MultimediaWidgets
+	${OpenCV_LIBS}
+	${GTK2_LIBRARIES}
+)
 

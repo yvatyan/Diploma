@@ -4,7 +4,7 @@
 #include <QThreadPool>
 #define NDEBUG
 
-bool VideoFrameProcessor::multiThreadingEnabled = true;
+bool VideoFrameProcessor::multiThreadingEnabled = true;	// TODO: HARDCODED
 void VideoFrameProcessor::AddRunnableTask(const ThreadRunnableTask& task) {
 	runnableTasks.append(task);
 }
