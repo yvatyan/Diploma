@@ -1,0 +1,32 @@
+#include <vector>
+#include <map>
+
+class FeatureDB {
+    public:
+        void Add(const FeatureWrapper& value);
+
+        std::list<std::list<FeatureWrapper> > GetRigidObjectPointsList(const FeatureDB& fdb); //Points
+        std::vector<std::pair <Point, Point> > GetRigidObjectsBoundingRegion(const FeatureDB& fdb); //Rectangles
+
+    private:
+        struct DescriptorVector {
+                DescriptorVector(const std::vector<double>& descriptor); 
+        
+                bool operator==(const DescriptorVector& rhp);
+                bool operator!=(const DescriptorVector& rhp);
+                bool operator>=(const DescriptorVector& rhp);
+                bool operator<=(const DescriptorVector& rhp);
+                bool operator<(const DescriptorVector& rhp);
+                bool operator>(const DescriptorVector& rhp);
+            private:
+                std::vector<double>& descr;
+        };
+
+        double threshold = 0.1;
+        std::map<DescriptorVector, FeatureWrapper> database;
+
+        std::pair<std::vector<FeatureWrapper>, std::vector<FeatureWrapper> > getCommonElements(const FeatureDB& fdb) const;
+        double sqr(double x) {
+            return x*x;
+        }
+};

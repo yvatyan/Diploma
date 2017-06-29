@@ -33,7 +33,7 @@ struct Rectangle {
     size_t width;
     int lt_point_x;
     int lt_point_y;
-	Rectangle(int x, int y, size_t h, size_t w) {
+	Rectangle(int x = -1, int y = -1, size_t h = 0, size_t w = 0) {
 		lt_point_x = x;
 		lt_point_y = y;
 		height = h;
@@ -69,7 +69,8 @@ struct RgbaColor {
 };
 class AnnotatedRectangle {
 	public:
-		AnnotatedRectangle(const Rectangle& rect, const RgbaColor regionColor, const std::string& rectCaption);
+		AnnotatedRectangle();
+		AnnotatedRectangle(const Rectangle& rect, const RgbaColor regionColor, const std::string& rectCaption = std::string());
 
 		Rectangle GetRectangle() const; 
 		RgbaColor GetRgbaColor() const;
@@ -96,7 +97,7 @@ struct Point {
 class AnnotatedPoint {
 	public:
 		AnnotatedPoint();
-		AnnotatedPoint(const Point& p, const RgbaColor pointColor, const std::string& pointCaption);
+		AnnotatedPoint(const Point& p, const RgbaColor pointColor, const std::string& pointCaption = std::string());
 
 		Point GetPoint() const; 
 		RgbaColor GetRgbaColor() const;

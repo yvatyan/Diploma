@@ -1,3 +1,4 @@
+#include <QDebug>
 /**@file
    Functions and structures for dealing with image features.
    
@@ -43,6 +44,20 @@ enum feature_match_type
 */
 struct feature
 {
+  feature() {
+	  init_default();
+  }
+  feature(const feature& copy) {
+//	  qDebug() << "feature CTOR";
+	  init_copy(copy);
+//	  qDebug() << "feature CTOR -- end";
+  }
+  feature& operator=(const feature& copy) {
+//	  qDebug() << "feature AO";
+	  init_copy(copy);
+//	  qDebug() << "feature AO -- end";
+  }
+  ~feature(){}
   double x;                      /**< x coord */
   double y;                      /**< y coord */
   double a;                      /**< Oxford-type affine region parameter */
@@ -60,6 +75,35 @@ struct feature
   CvPoint2D64f img_pt;           /**< location in image */
   CvPoint2D64f mdl_pt;           /**< location in model */
   void* feature_data;            /**< user-definable data */
+  private:
+  	void init_default() {
+		d = 0;
+		fwd_match = NULL;
+		bck_match = NULL;
+		mdl_match = NULL;
+		feature_data = NULL;
+	}
+	void init_copy(const feature& copy) {
+		x = copy.x;
+		y = copy.y;
+		a = copy.a;
+		b = copy.b;
+		c = copy.c;
+		scl = copy.scl;
+		ori = copy.ori;
+		d = copy.d;
+		for(size_t i = 0; i < d; ++i) {
+			descr[i] = copy.descr[i];
+		}
+		type = copy.type;
+		category = copy.category;
+		fwd_match = copy.fwd_match;
+		bck_match = copy.bck_match;
+		mdl_match = copy.mdl_match;
+		img_pt = copy.img_pt;
+		mdl_pt = copy.mdl_pt;
+		feature_data = copy.feature_data;
+	}
 };
 
 

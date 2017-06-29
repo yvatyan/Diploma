@@ -1,4 +1,5 @@
 #include "Core/ProcessingEngine/SiftFeatures.h"
+#include <QDebug>
 
 SiftFeatures::SiftFeatures(const bool configNeeded) {
 	if(configNeeded) {
@@ -21,20 +22,32 @@ VideoFrameData SiftFeatures::Process(const VideoFrameData& dataToProcess) {
 		      		img_dbl,
 					descr_width,
 					descr_hist_bins);
-  
-	std::vector<AnnotatedPoint> avgPoints(featCount);
-	for(size_t i = 0; i < featCount; ++i) {
-		avgPoints[i] = AnnotatedPoint(
-						Point(features[i].x, features[i].y),
-						RgbaColor(255, 0, 0, 255),
-						std::string(""));
+	qDebug() << "--------" << featCount;
+	if(!database.IsEmpty()) {
+		//std::vector<AnnotatedRectangle> boundingRegions(database.GetRigidObjectsBoundingRegion(features, featCount));
+		//qDebug() << "Regions count: " << boundingRegions.size();
+		typedef std::list<AnnotatedPoint>::const_iterator list_iterator;
+		typedef std::list<std::list<AnnotatedPoint> >::const_iterator list_list_iterator;
+		std::list<std::list<AnnotatedPoint> > objectPoints(database.GetRigidObjectPointsList(features, featCount));	
+		std::vector<AnnotatedPoint> annoPoints;
+		for(list_list_iterator it1 = objectPoints.cbegin(); it1 != objectPoints.cend(); ++it1) {
+			for(list_iterator it2 = it1->cbegin(); it2 != it1->cend(); ++it2) {
+				annoPoints.push_back(*it2);
+			}
+		}
+		database.Update(features, featCount);
+		return VideoFrameData(
+					ImageData(),
+					Name(),
+					dataToProcess.GetFrameNumber(),
+					//boundingRegions);
+					std::vector<AnnotatedRectangle>(),
+					annoPoints);
+	} else {
+		database.Update(features, featCount);
+		return VideoFrameData::NoResult;
 	}
-	return VideoFrameData(
-				ImageData(),
-				Name(),
-				dataToProcess.GetFrameNumber(),
-				std::vector<AnnotatedRectangle>(),
-				avgPoints);
+	// free( features ); TODO: Should make it somewhere to avois memory leak
 }
 void SiftFeatures::Configure(const ConfigCollection& config) {
 	intvls = config.GetConfigValue<int>("Intvls");

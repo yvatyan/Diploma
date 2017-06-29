@@ -6,13 +6,13 @@
 
 quint64 CoverWidget::minSelectionArea = 64;
 QFont CoverWidget::font = QFont("Times", 8);
-size_t CoverWidget::crossPointVerLen = 10;
-size_t CoverWidget::crossPointHorLen = 10;
+size_t CoverWidget::crossPointVerLen = 10;	//TODO: HARDCODED
+size_t CoverWidget::crossPointHorLen = 10;	//TODO: HARDCODED
 CoverWidget::CoverWidget(QWidget* parent) : QWidget(parent) {
-    selectionDisabled = false;
-	textDisabled = true;
-	rectRegionsDisabled = false;
-	crossPointsDisabled =  false;
+    selectionDisabled = false;	// TODO: HARDCODED
+	textDisabled = false;	// TODO: HARDCODED
+	rectRegionsDisabled = false;	// TODO: HARDCODED
+	crossPointsDisabled =  false;	// TODO: HARDCODED
     setMouseTracking(false);
 }
 void CoverWidget::mousePressEvent(QMouseEvent* event) {

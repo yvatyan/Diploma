@@ -1,4 +1,5 @@
 #include "Core/Job.h"
+#include "Core/ProcessingEngine/FeatureDB.h"
 #include "Core/ProcessingEngine/OpenSift/include/sift.h"
 #include "Core/ProcessingEngine/OpenSift/include/imgfeatures.h"
 
@@ -20,4 +21,5 @@ class SiftFeatures : public Job {
 		// end
 		bool configured;
 		void initDefaultConfig();
+		FeatureDB database;
 };

@@ -41,7 +41,10 @@ add_executable(
 	Core/Misc.cpp
     Core/OptionsManager.cpp 
 	Core/ProcessingEngine/Demo/MonoChromeProc.cpp
+	Core/ProcessingEngine/FeatureDB.cpp
 	Core/ProcessingEngine/OpenSift/src/imgfeatures.cpp
+	Core/ProcessingEngine/OpenSift/src/kdtree.cpp
+	Core/ProcessingEngine/OpenSift/src/minpq.cpp
 	Core/ProcessingEngine/OpenSift/src/sift.cpp
 	Core/ProcessingEngine/OpenSift/src/utils.cpp
 	Core/ProcessingEngine/SiftFeatures.cpp
